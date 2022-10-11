@@ -1,36 +1,13 @@
 const express = require('express');
-const morgan = require('morgan');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
-
 const sequelize = require('./sources/db/sequelize.js');
-
-
 
 const app = express();
 const port = 3000;
 
-
-// APP MiddleWare (acts on res and req of express)
-//methode next , fournie par express, indique que le traitement est terminé
-
-// const logger = (req, res, next) => {
-//     console.log(`URL: ${req.url}`);
-//     next()
-// }
-
-// app.use(logger); // launch the logger
-//Avoid intermediate variable, declared in app.use
-
-// app.use((req, res, next) => {
-//     console.log(`URL : ${req.url}`);
-//     next();
-// })++
-
-// install morgan middleware which is used to log all request in the console and debug, only in dev
 app
     .use(favicon(__dirname + '/favicon.ico'))
-    .use(morgan('dev')) // details log message ( option 'dev'), next is done internally
     .use(bodyParser.json())
 
 sequelize.initDb();
