@@ -12,11 +12,11 @@ app
 	.use(favicon(__dirname + '/sources/ico/favicon.ico'))
 	.use(bodyParser.json());
 
-sequelize.initDb();
-
 app.get('/', (req, res) => {
 	res.json('hello Heroku ! 😁')
 })
+	
+sequelize.initDb();
 
 require('./sources/routes/findAllPokemons')(app); // No need of intermediate variable
 require('./sources/routes/findPokemonByPk')(app);
