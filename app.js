@@ -6,13 +6,17 @@ const bodyParser = require('body-parser');
 const sequelize = require('./sources/db/sequelize.js');
 
 const app = express();
-const port = 3000 ;
+const port = process.env.PORT || 3000 ;
 
 app
 	.use(favicon(__dirname + '/favicon.ico'))
 	.use(bodyParser.json());
 
 sequelize.initDb();
+
+app.get('/', (req, res) => {
+	res.json('hello Heroku ! 😁')
+})
 
 require('./sources/routes/findAllPokemons')(app); // No need of intermediate variable
 require('./sources/routes/findPokemonByPk')(app);
